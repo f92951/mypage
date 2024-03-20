@@ -65,7 +65,35 @@
         <diV class="bucket img1-t5 center">신용대출금 4천만원 상환</diV>
         <diV class="bucket img2-t5 center">3.67억원 연금자산 달성(채권강화)</diV>
     </div>
+<script>
+      // 페이지 로드 시 이전 상태 복원
+      document.addEventListener("DOMContentLoaded", (event) => {
+        const buckets = document.querySelectorAll(".bucket");
+        buckets.forEach((bucket, index) => {
+          // 로컬 스토리지에서 상태 읽기
+          const isDone = localStorage.getItem("bucket" + index) === "done";
+          if (isDone) {
+            bucket.classList.add("done");
+          }
+        });
+      });
 
+      // 버킷 리스트 클릭 이벤트
+      const buckets = document.querySelectorAll(".bucket");
+      buckets.forEach((bucket, index) => {
+        bucket.addEventListener("click", function () {
+          // 클래스 토글
+          bucket.classList.toggle("done");
+
+          // 로컬 스토리지에 상태 저장
+          if (bucket.classList.contains("done")) {
+            localStorage.setItem("bucket" + index, "done");
+          } else {
+            localStorage.setItem("bucket" + index, "");
+          }
+        });
+      });
+    </script>
 
 </body>
 
